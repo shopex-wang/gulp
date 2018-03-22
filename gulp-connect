@@ -1,0 +1,30 @@
+var gulp = require('gulp'),
+    uglify = require('gulp-uglify'),
+    connect = require('gulp-connect'),
+    pump = require('pump');
+
+//定义server,配置完成后，还需要运行gulp connect启动服务
+//需要输入ip＋端口号，才可以访问，目前自动刷新的功能还不可以
+gulp.task('connect', function() {
+    connect.server({
+        root: '/data/weixuan_bk/',    //物理路径，相对根目录，可省略
+        host: '192.168.95.139',     //IP地址，可省略
+        port: '8085',     //端口号，可省略
+        livereload: true
+    });
+});
+
+gulp.task('js', function(cb) {
+    pump([
+        gulp.src('src/js/*.js'),
+        uglify(),
+        gulp.dest('dist/js'),
+        connect.reload()
+    ], cb)
+});
+
+gulp.task('watch', function() {
+    gulp.watch(['src/js/*.js'], ['js']);
+});
+
+gulp.task('dev', ['connect', 'js', 'watch']);

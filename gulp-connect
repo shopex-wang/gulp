@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 //需要输入ip＋端口号，才可以访问，目前自动刷新的功能还不可以
 gulp.task('connect', function() {
     connect.server({
-        root: '/data/weixuan_bk/',    //物理路径，相对根目录，可省略
+        root: '/data/weixuan_bk/',    //服务启动的根目录，物理路径，相对根目录，可省略
         host: '192.168.95.139',     //IP地址，可省略
         port: '8085',     //端口号，可省略
         livereload: true
